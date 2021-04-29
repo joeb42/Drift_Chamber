@@ -218,20 +218,26 @@ class DriftChamber:
 
 
 class Widget:
+    """Tkinter window allows user to select grid spacing, generate random muon tracks and start/stop animation"""
 
     def __init__(self):
+        """Initialises window with buttons and matplotlib figure"""
+        # Set up matplotlib figure
         self.fig = Figure(figsize=(6, 4), dpi=150)
         self.sp = self.fig.add_subplot(111)
         self.sp.set_xlabel('y coordinate (cm)')
         self.sp.set_ylabel('z coordinate (cm)')
         self.sp.set_ylim(0, 30)
         self.sp.set_xlim(0, 50)
+        # Set up Tkinter window
         self.root = tk.Tk()
         self.root.title('Drift Chamber')
+        # Integrate matplotlib figure into window
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.root)
         self.canvas.get_tk_widget().grid(column=0, row=3)
         spacings_label = tk.Label(self.root, text='Select a grid spacing')
         spacings_label.grid(row=0, column=1)
+        # Combobox to get grid spacing from user
         self.spacings = ttk.Combobox(self.root, values=['1', '0.5', '0.1'], state='readonly')
         self.spacings.grid(row=1, column=1)
         spacing_button = tk.Button(self.root, text='Press to confirm spacing', command=self.spacing_press)
@@ -247,9 +253,11 @@ class Widget:
         tk.mainloop()
 
     def stop_press(self):
+        """Button command stops animation by setting stop variable to True"""
         self.stop = True
 
     def clear_press(self):
+        """Button command clears plot and rebuilds blank axis"""
         self.chamber.grid *= 0.
         self.fig.clf()
         self.sp = self.fig.add_subplot(111)
@@ -260,9 +268,11 @@ class Widget:
         self.canvas.draw()
 
     def spacing_press(self):
+        """Button sets grid spacing to user input from spacings combobox"""
         self.chamber = DriftChamber(spacing=float(self.spacings.get()))
 
     def gen_muon(self):
+        """Generates a random muon track, handling MissedDetector exceptions"""
         while True:
             try:
                 m = Muon()
@@ -276,18 +286,23 @@ class Widget:
                 continue
 
     def __animate(self, i):
+        """Animation function called at each frame. Updates charge grid by iteratively solving matrix equation by 
+        called drift_diff method from DriftChamber class"""
         self.chamber.drift_diff()
         self.im.set_array(self.chamber.grid)
         self.fig.suptitle(f't = {round(i * self.chamber.tau, 6)} seconds')
         return [self.im]
 
     def __gen(self):
+        """Stops animation when stop attribute set to False by stop button"""
         i = 0
         while not self.stop:
             i += 1
             yield i
 
     def ani(self):
+        """Button commmand begins animation. Stores animation object in class scope to avoid garbage collection
+        which is neccessary for animation to work"""
         self.stop = False
         self.an = animation.FuncAnimation(self.fig, self.__animate, interval=15, frames=self.__gen, repeat=False)
         self.canvas.draw()
