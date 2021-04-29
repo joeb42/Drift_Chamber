@@ -178,8 +178,7 @@ class DriftChamber:
     @property
     def lu(self):
         """
-        This is the 'getter' for the lu attribute. This function is called whenever the lu attribute is referenced,
-        both publically and privately. Using the property decorator allows flexibility to easily change the matrix
+        This is the 'getter' for the lu attribute. Using the property decorator allows flexibility to easily change the matrix
         mid simulation (e.g by turning off the electric field) by simply changing the values of the alpha or beta
         attribute.  First checks if alpha or beta attributes have changed, then reconstructs sparse matrix
         and lu factorises if either have changed.
