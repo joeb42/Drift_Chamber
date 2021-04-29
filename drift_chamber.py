@@ -106,13 +106,9 @@ class DriftChamber:
     _mat: (private) sparse matrix for iterative computation of drift diffusion of charge
     lu: sparse lu factorisation of mat, implemented with a getter @property decorator to ensure that any changes
     in the electric field or diffusivity are reflected in the matrix
-    fig: Matplotlib figure for animating drift diffusion
-    ax: axes for animation
-    im: image representing grid of charge for animation
-    anim: Matplotlib FuncAnimation instance, needs to be stored in class scope
-    so not garbage collected in order for animation to work
     E: numerical electric field
     D: numerical diffusivity
+    tau: positive numerical timestep 
     """
 
     def __init__(self, spacing=1., E=1e5, D=0.1, tau=1e-6, mat=True):
