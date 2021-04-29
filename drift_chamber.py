@@ -88,7 +88,6 @@ class MissedDetector(Exception):
         """
         self.muon = muon
         self.message = 'Muon has missed detector!'
-        # Inherit constructor from parent Exception class
         super().__init__(self.message)
 
     def __str__(self):
