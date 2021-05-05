@@ -103,12 +103,11 @@ class DriftChamber:
     Attributes:
     grid: numpy 2d array representing charge distribution in drift chamber
     spacing: grid spacing (floating point)
-    _mat: (private) sparse matrix for iterative computation of drift diffusion of charge
     lu: sparse lu factorisation of mat, implemented with a getter @property decorator to ensure that any changes
     in the electric field or diffusivity are reflected in the matrix
     E: numerical electric field
     D: numerical diffusivity
-    tau: positive numerical timestep 
+    tau: positive numerical timestep for drift diffusion matrix
     """
 
     def __init__(self, spacing=1., E=1e5, D=0.1, tau=1e-6, mat=True):
@@ -178,10 +177,8 @@ class DriftChamber:
     @property
     def lu(self):
         """
-        This is the 'getter' for the lu attribute. Using the property decorator allows flexibility to easily change the matrix
-        mid simulation (e.g by turning off the electric field) by simply changing the values of the alpha or beta
-        attribute.  First checks if alpha or beta attributes have changed, then reconstructs sparse matrix
-        and lu factorises if either have changed.
+        Lu factorisation of drift diffusion matrix. 
+        @property used to allow flexibility in changing E field mid simulation
         """
         if self._mat[1, 0] == -self.alpha - self.beta and self._mat[0, 1] == -self.alpha:
             return self._lu
