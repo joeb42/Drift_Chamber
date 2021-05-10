@@ -4,4 +4,7 @@ The drift chamber is an example of a wire chamber that have been used in high en
 
 ## Monte Carlo Treatment of Cosmic Ray Muons
 
-The properties of 
+Incident cosmic ray muons were simulated in a monte carlo fashion, making extensive use of the random library from Numpy.
+\begin{figure}
+\end{figure}
+
