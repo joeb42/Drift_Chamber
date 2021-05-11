@@ -54,9 +54,6 @@ class Muon:
         self.y_coord = length * np.random.random() - 0.5 * length + 25
 
     def __str__(self):
-        """
-        String representation of Muon object for ease of debugging and for use in MissedDetector exception
-        """
         return f'''Cosmic ray muon of energy {round(self.energy)} GeV, with charge {self.charge} e, 
     zenith angle {round(self.zen, 2)} radians and azimuthal angle {round(self.azi, 2)} radians, 
 y coord {round(self.y_coord, 2)}'''
@@ -92,7 +89,7 @@ class MissedDetector(Exception):
 
     def __str__(self):
         """
-        Print string repr of muon object to get some info as to why exception has occured from muon attributes.
+        String repr of muon object to get some info as to why exception has occured from muon attributes.
         """
         return f'{self.muon} -> {self.message}'
 
@@ -135,7 +132,6 @@ class DriftChamber:
             self._lu = sparse.linalg.spilu(self._mat)
 
     def __str__(self):
-        """String representation of DriftChamber object for ease of debugging"""
         return f'''Drift Chamber object, grid spacing of {self.spacing}cm, 
         diffusivity of {self.D}, E-field of {self.E}.'''
 
@@ -165,7 +161,7 @@ class DriftChamber:
             # Thus energy loss is quantised and so rounded to the nearest smallest integer by wrapping in int
             d = t * self.spacing
             n_electrons = int(stats.moyal.rvs(94 * d, (94 * d) ** 0.5))
-            #  Convert coordinates to grid indices
+            # Convert coordinates to grid indices
             if right:
                 j = math.ceil(y - 1)
             else:
@@ -233,10 +229,13 @@ class Widget:
         self.spacings.grid(row=1, column=1)
         spacing_button = tk.Button(self.root, text='Press to confirm spacing', command=self.spacing_press)
         spacing_button.grid(row=2, column=1)
+        # Button to generate muon track
         muon_button = tk.Button(self.root, text='Press to generate random muon track', command=self.gen_muon)
         muon_button.grid(row=3, column=1)
+        # Animation start button
         ani_button = tk.Button(self.root, text='Press to start animation', command=self.ani)
         ani_button.grid(row=4, column=1)
+        # Animation stop button
         stop_button = tk.Button(self.root, text='Press to stop animation', command=self.stop_press)
         stop_button.grid(row=5, column=1)
         clear_button = tk.Button(self.root, text='Press to clear axis', command=self.clear_press)
@@ -278,7 +277,7 @@ class Widget:
 
     def __animate(self, i):
         """Animation function called at each frame. Updates charge grid by iteratively solving matrix equation by 
-        called drift_diff method from DriftChamber class"""
+        called drift_diff method from DriftChamber instance"""
         self.chamber.drift_diff()
         self.im.set_array(self.chamber.grid)
         self.fig.suptitle(f't = {round(i * self.chamber.tau, 6)} seconds')
