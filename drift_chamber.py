@@ -26,9 +26,9 @@ class Muon:
     zen: Zenith angle, random value distributed proportional to cos^2 between 3pi/2 and pi/2
     energy: Random log-normal value in GeV of mean 6.55 and stdev 1.8
     charge: Randomly generated charge of muon takes values +1 (with probability 0.53) and -1 (with probability 0.47)
-    x_coord: x coordinate of muon on plane in cm (direction into the page in relation to diagram above)
-    y_coord: y coordinate of muon on plane in cm (horizontal direction in relation to diagram above)
-    height: height of plane above detector in cm (vertical direction in relation to diagram above). Must be >= 30 (height of detector)
+    x_coord: x coordinate of muon on plane in cm (direction into the page in relation to diagram)
+    y_coord: y coordinate of muon on plane in cm (horizontal direction in relation to diagram)
+    height: height of plane above detector in cm (vertical direction in relation to diagram). Must be >= 30 (height of detector)
     """
 
     def __init__(self, width=100, length=80, height=60):
