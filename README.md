@@ -41,5 +41,9 @@ Using an implicit finite difference method one arrives at the following expressi
 <br>
 ![equation](https://latex.codecogs.com/gif.latex?q_%7Bi%2Cj%7D%5Et%20%3D%20%28-a-b%29q_%7Bi-1%2C%20j%7D%5E%7Bt&plus;1%7D%20-%20aq_%7Bi&plus;1%2Cj%7D%5E%7Bt&plus;1%7D%20-%20aq_%7Bi%2C%20j&plus;1%7D%5E%7Bt&plus;1%7D%20-%20aq_%7Bi%2C%20j-1%7D%5E%7Bt&plus;1%7D%20&plus;%20%281&plus;4a&plus;b%29q_%7Bi%2Cj%7D%5E%7Bt&plus;1%7D)
 <br>
-
-
+Here a = (D * timestep)/spacing and b = timestep * E / (2 * mu * spacing). 
+This can be written compactly as the matrix equation
+<br>
+![equation](https://latex.codecogs.com/gif.latex?%5Cvec%7Bq%5Et%7D%20%3D%20M%5Cvec%7Bq%5E%7Bt&plus;1%7D%7D)
+<br>
+It is then a mere matter of solving a matrix equation at each time step. This can be optimised nicely by using SciPy's Sparse library, although memory considerations mean that care needs to be taken in not setting too small of a grid spacing. 
