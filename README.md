@@ -47,3 +47,7 @@ This can be written compactly as the matrix equation
 ![equation](https://latex.codecogs.com/gif.latex?%5Cvec%7Bq%5Et%7D%20%3D%20M%5Cvec%7Bq%5E%7Bt&plus;1%7D%7D)
 <br>
 It is then a mere matter of solving a matrix equation at each time step. This can be optimised nicely by using SciPy's Sparse library, although memory considerations mean that care needs to be taken in not setting too small of a grid spacing. 
+
+## Acknowledgements
+
+Thanks to Dr Jim Brooke (lecturer in experimental particle physics at the University of Bristol) for his teaching material on numerical solutions to PDE problems and monte carlo methods and for the formulation of this problem as part of the Computational Physics 301 unit he teaches.
