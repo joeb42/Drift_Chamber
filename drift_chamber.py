@@ -138,6 +138,8 @@ class DriftChamber:
     def initial_ion(self, muon):
         """Updates charge grid to reflect initial ionisation pattern from incident muon.
         Takes muon (Muon object) as a required positional arg.
+        Here the energy loss is modelled using the moyal distribution which is an accurate description 
+        of the energy loss of high energy radiation in matter.
         """
         #  Get starting coordinates in units of spacing
         y, z = muon.starting_coords()[0] / self.spacing, muon.starting_coords()[1] / self.spacing
