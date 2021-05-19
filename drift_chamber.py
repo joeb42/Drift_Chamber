@@ -13,11 +13,6 @@ import matplotlib.cm
 import copy
 from matplotlib.figure import Figure
 
-# Copy the jet cmap from matplotlib
-my_cmap = copy.copy(matplotlib.cm.get_cmap('jet'))
-# Set bad (zero value) pixels to dark blue
-my_cmap.set_bad((0, 0, 0.5))
-
 
 class Muon:
     """Cosmic ray muon object. Coordinate positions are taken relative to an origin in bottom left corner of detector.
@@ -265,6 +260,11 @@ class Widget:
 
     def gen_muon(self):
         """Generates a random muon track, handling MissedDetector exceptions"""
+        # Need custom cmap to handle 0 value pixels in lognorm normalisation
+        # Copy the jet cmap from matplotlib
+        my_cmap = copy.copy(matplotlib.cm.get_cmap('jet'))
+        # Set bad (zero value) pixels to dark blue
+        my_cmap.set_bad((0, 0, 0.5))
         while True:
             try:
                 m = Muon()
