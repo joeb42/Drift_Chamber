@@ -173,8 +173,10 @@ class DriftChamber:
         Lu factorisation of drift diffusion matrix. 
         @property used to allow flexibility in changing E field mid simulation
         """
+        # Check if matrix corresponds to other attributes
         if self._mat[1, 0] == -self.alpha - self.beta and self._mat[0, 1] == -self.alpha:
             return self._lu
+        # Recontruct matrix if there is a discrepancy 
         nz, ny = self.grid.shape
         self._mat = sparse.diags([1 + 4 * self.alpha + self.beta, -self.alpha, -self.alpha - self.beta,
                                   -self.alpha, -self.alpha], [0, 1, -1, ny, -ny], shape=(nz * ny, nz * ny),
