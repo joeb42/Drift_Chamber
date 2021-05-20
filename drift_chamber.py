@@ -1,12 +1,12 @@
 import numpy as np
 import tkinter as tk
 from tkinter import ttk
+import math
+from scipy import stats, optimize, sparse
 import matplotlib
 matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import matplotlib.pyplot as plt
-import math
-from scipy import stats, optimize, sparse
 import matplotlib.animation as animation
 from matplotlib.colors import LogNorm
 import matplotlib.cm
