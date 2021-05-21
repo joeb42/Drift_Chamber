@@ -30,13 +30,13 @@ Of course this method is only valid where the function F is analytically inverta
 
 ## Numerical simulation of ion drift diffusion 
 
-After the Argon gas is ionised by the muon, the newly charged particles will undergo both drift (owing to the large electric field) and diffusion. Here the scenario is modelled numerically by discretising the chamber into a series of grid squares and modelling the changes in the charge distribution with a finite difference method. 
+After the Argon gas is ionised by the muon, the newly charged particles will undergo both drift (owing to the large electric field) and diffusion. Here the scenario is modelled numerically by discretising the chamber into a series of grid squares and modelling the changes in the charge distribution over time with a finite difference method. 
 <br>
 The change in the charge distribution q(x,y) over time is modelled by the following differential equation:
 <br>
 ![equation](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Cpartial%20q%7D%7B%5Cpartial%20t%7D%20%3D%20D%20%5Cnabla%5E2q%20-%20%5Cfrac%7B1%7D%7B%5Cmu%7D%20E%5Cnabla%20q)
 <br> 
-, where D is the diffusivity of Argon that quantifies the amount of diffusion taking place. 
+, where D is the diffusivity of the Argon gas that quantifies the amount of diffusion taking place. 
 Using an implicit finite difference method one arrives at the following expression for the charge at grid coordinate (i,j) at time t:
 <br>
 ![equation](https://latex.codecogs.com/gif.latex?q_%7Bi%2Cj%7D%5Et%20%3D%20%28-a-b%29q_%7Bi-1%2C%20j%7D%5E%7Bt&plus;1%7D%20-%20aq_%7Bi&plus;1%2Cj%7D%5E%7Bt&plus;1%7D%20-%20aq_%7Bi%2C%20j&plus;1%7D%5E%7Bt&plus;1%7D%20-%20aq_%7Bi%2C%20j-1%7D%5E%7Bt&plus;1%7D%20&plus;%20%281&plus;4a&plus;b%29q_%7Bi%2Cj%7D%5E%7Bt&plus;1%7D)
