@@ -18,7 +18,7 @@ The drift chamber is an example of a wire chamber that have been used in high en
 
 ## Monte Carlo Treatment of Cosmic Ray Muons
 
-Incident cosmic ray muons were simulated in a monte carlo fashion, predominantly making use of the random function from the Numpy random library. Here we are interested in mapping the uniform probability distribution on the interval \[0, 1) provided by the random function to a general pdf P(y) on some specified interval between y<sub>0</sub> and y<sub>1</sub>. In order for this to work we require that the CDFs (cumulative density functions) are equal. This means that for some randomly generated x<sub>in</sub> from the random function we have the following equality <br>
+Incident cosmic ray muons were simulated in a monte carlo fashion, predominantly making use of the random function from the Numpy random library. Here we are interested in mapping the uniform probability distribution on the interval \[0, 1) provided by the random function to a general PDF P(y) on some specified interval between y<sub>0</sub> and y<sub>1</sub>. In order for this to work we require that the CDFs (cumulative density functions) are equal. This means that for some randomly generated x<sub>in</sub> from the random function we have the following equality <br>
 ![equation](https://latex.codecogs.com/gif.latex?%5Cint_%7Bx_0%7D%5E%7Bx_%7Bin%7D%7D%20u%28x%29%20dx%20%3D%20%5Cint_%7By_0%7D%5E%7By_%7Bout%7D%7D%20P%28y%29%20dy)
  <br> where u(x) is the uniform distribution provided by the random function and y<sub>out</sub> is the desired output. The LHS of this comes out as just x<sub>in</sub> which leads to the following equation for y<sub>out</sub> <br>
 ![equation](https://latex.codecogs.com/gif.latex?y_%7Bout%7D%20%3D%20F%5E%7B-1%7D%28x_%7Bin%7D%29)
