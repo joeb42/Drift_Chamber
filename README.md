@@ -47,3 +47,9 @@ This can be written compactly as the matrix equation
 ![equation](https://latex.codecogs.com/gif.latex?%5Cvec%7Bq%5Et%7D%20%3D%20M%5Cvec%7Bq%5E%7Bt&plus;1%7D%7D)
 <br>
 It is then a mere matter of solving a matrix equation at each time step. This can be optimised nicely by using SciPy's Sparse library, although memory considerations mean that care needs to be taken in not setting too small of a grid spacing. At present the primary limitation of this method is in the existence of a periodic boundary condition. That is, all charge that drift diffuses through a boundary reappears through the opposite boundary. Here the effect is damped by manually setting all charge to 0 within 2cm of the chamber but this is somewhat unsatifactory and needs further work.
+
+## Running
+Note this project depends on tkinter so make sure you are running a python distribution that is compatible (I built this project using miniconda). <br> 
+If using miniconda ensure you have pip installed into your environment with ```conda install pip```. <br>
+Run the command ```pip install -e .``` to install all dependencies. <br>
+Run ```python main.py```: this should pop up a GUI window and you should be able to select some options and run the simuution with the animation in the window. 
