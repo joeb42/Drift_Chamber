@@ -9,8 +9,8 @@ from matplotlib.colors import LogNorm
 import matplotlib.cm
 from matplotlib.figure import Figure
 import copy
-from muon import Muon, MissedDetector
-from driftchamber import DriftChamber
+from .muon import Muon, MissedDetector
+from .driftchamber import DriftChamber
 
 
 class Widget:

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.colors import LogNorm
 import matplotlib.cm
-from muon import Muon, MissedDetector
+from .muon import Muon, MissedDetector
 
 
 class DriftChamber:
@@ -31,7 +31,7 @@ class DriftChamber:
     D: numerical diffusivity
     """
 
-    def __init__(self, spacing=1.0, E=1e5, D=0.1, tau=1e-6, mat=True):
+    def __init__(self, spacing: float = 1.0, E: float = 1e5, D: float = 0.1, tau: float = 1e-6, mat: bool = True) -> None:
         """
         Contructor initialises class attributes as well as charge grid and drift diffusion matrix (also lu factorises).
         Takes positive numerical spacing, numerical E (electric field), positive numerical D (diffusivity)
@@ -39,7 +39,7 @@ class DriftChamber:
         Also takes mat kwarg, True by default, this should be set to False if need to avoid constructing matrix
         (e.g for investigating small spacings in the initial ionisation track that would otherwise generate very large matricies).
         """
-        self.grid = np.zeros((int(30 / spacing), (int(50 / spacing))))
+        self.grid: np.ndarray = np.zeros((int(30 / spacing), (int(50 / spacing))))
         self.spacing = spacing
         self.tau = tau
         self.E = E
@@ -62,14 +62,14 @@ class DriftChamber:
                 format="csc",
             )
             # Lu factorise for faster solving
-            self._lu = sparse.linalg.spilu(self._mat)
+            self._lu: sparse.linalg.SuperLU = sparse.linalg.spilu(self._mat)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """String representation of DriftChamber object for ease of debugging"""
         return f"""Drift Chamber object, grid spacing of {self.spacing}cm, 
         diffusivity of {self.D}, E-field of {self.E}."""
 
-    def initial_ion(self, muon):
+    def initial_ion(self, muon: Muon) -> None:
         """Updates charge grid to reflect initial ionisation pattern from incident muon.
         Takes muon (Muon object) as a required positional arg.
         """
@@ -139,7 +139,7 @@ class DriftChamber:
         self._lu = sparse.linalg.spilu(self._mat)
         return self._lu
 
-    def drift_diff(self):
+    def drift_diff(self) -> None:
         """
         Updates charge grid by solving matrix equation for single iteration.
         Dampens periodicity by setting all grid cells within 2cm from boundary to 0.
@@ -157,14 +157,14 @@ class DriftChamber:
         self.grid[-boundary:, :] = 0
         self.grid[:boundary, :] = 0
 
-    def __init(self):
+    def __init(self) -> list[np.ndarray]:
         """
         Private method only used for animation.
         """
         self.im.set_data(np.zeros(self.grid.shape))
         return [self.im]
 
-    def __ani(self, i):
+    def __ani(self, i: int) -> list[np.ndarray]: 
         """
         Private method updates animation at each frame. Calls drift_diff method at each frame.
         """
@@ -173,7 +173,7 @@ class DriftChamber:
         self.fig.suptitle(f"t = {round(i * self.tau, 6)} seconds")
         return [self.im]
 
-    def animate(self, vmin=1e-4, vmax=1):
+    def animate(self, vmin: float = 1e-4, vmax: float = 1.) -> None:
         """
         Plots a Matplotlib funcanimation of charge drift-diffusion.
         Takes positive numerical vmin and vmax arg as min, max values for log scale colour normalisation.
