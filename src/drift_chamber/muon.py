@@ -43,7 +43,7 @@ class Muon:
 
         return f"Muon: energy: {self.energy:.3f} GeV, charge: {self.charge}e, zenith: {self.zen:.3f}, azimuthal: {self.azi}, x: {self.x_coord:.3f}, y: {self.y_coord:.3f}"
 
-    def starting_coords(self) -> tuple[float]:
+    def starting_coords(self) -> tuple[float, float]:
         """
         Return coordinates of where muon enters detector.
         Raises MissedDetector if muon path never intersects detector.
