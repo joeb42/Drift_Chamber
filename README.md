@@ -51,7 +51,7 @@ It is then a mere matter of solving a matrix equation at each time step. This ca
 ## Running
 Note this project depends on tkinter so make sure you are running a python distribution that is compatible (I built this project using miniconda). <br> 
 If using miniconda ensure you have pip installed into your environment with ```conda install pip```. <br>
-Run the command ```pip install -e .``` to install all dependencies. <br>
+Run the command ```pip install .``` to install all dependencies, or ```pip install -e .``` if you would like to make your own alterations to the code. <br>
 Run ```python main.py```: this should pop up a GUI window and you should be able to select some options and run the simulution with the animation in the window. <br>
 ### Docker
 Alternatively use the included Dockerfile to build the docker image. Be aware that running GUI application using docker can be fiddly. To get this running on my mac I followed the instruction [here](https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949).
