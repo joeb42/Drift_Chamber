@@ -41,7 +41,7 @@ class Muon:
         String representation of Muon object for ease of debugging and for use in MissedDetector exception
         """
 
-        return f"Muon: energy: {self.energy:.3f} GeV, charge: {self.charge}e, zenith: {self.zen:.3f}, azimuthal: {self.azi}, x: {self.x_coord:.3f}, y: {self.y_coord:.3f}"
+        return f"Muon: energy: {self.energy:.0f} GeV, charge: {self.charge}e, zenith: {self.zen:.3f}, azimuthal: {self.azi:.3f}, x: {self.x_coord:.3f}, y: {self.y_coord:.3f}"
 
     def starting_coords(self) -> tuple[float, float]:
         """
@@ -63,9 +63,9 @@ class Muon:
         if not intersections:
             raise MissedDetector(self)
         t0 = min(intersections)
-        return self.y_coord + t0 * np.sin(self.zen) * np.sin(
-            self.azi
-        ), self.height + t0 * np.cos(self.zen)
+        x = self.y_coord + t0 * np.sin(self.zen) * np.sin(self.azi)
+        y = self.height + t0 * np.cos(self.zen)
+        return x, y
 
 
 class MissedDetector(Exception):
