@@ -31,7 +31,14 @@ class DriftChamber:
     D: numerical diffusivity
     """
 
-    def __init__(self, spacing: float = 1.0, E: float = 1e5, D: float = 0.1, tau: float = 1e-6, mat: bool = True) -> None:
+    def __init__(
+        self,
+        spacing: float = 1.0,
+        E: float = 1e5,
+        D: float = 0.1,
+        tau: float = 1e-6,
+        mat: bool = True,
+    ) -> None:
         """
         Contructor initialises class attributes as well as charge grid and drift diffusion matrix (also lu factorises).
         Takes positive numerical spacing, numerical E (electric field), positive numerical D (diffusivity)
@@ -108,7 +115,7 @@ class DriftChamber:
                 j = math.floor(y)
             i = math.floor(z)
             # Only take into account energy losses so take negative losses as 0 ionisation
-            self.grid[i, j] = max(n_electrons / (self.spacing ** 2), 0)
+            self.grid[i, j] = max(n_electrons / (self.spacing**2), 0)
 
     @property
     def lu(self):
@@ -164,7 +171,7 @@ class DriftChamber:
         self.im.set_data(np.zeros(self.grid.shape))
         return [self.im]
 
-    def __ani(self, i: int) -> list[np.ndarray]: 
+    def __ani(self, i: int) -> list[np.ndarray]:
         """
         Private method updates animation at each frame. Calls drift_diff method at each frame.
         """
@@ -173,7 +180,7 @@ class DriftChamber:
         self.fig.suptitle(f"t = {round(i * self.tau, 6)} seconds")
         return [self.im]
 
-    def animate(self, vmin: float = 1e-4, vmax: float = 1.) -> None:
+    def animate(self, vmin: float = 1e-4, vmax: float = 1.0) -> None:
         """
         Plots a Matplotlib funcanimation of charge drift-diffusion.
         Takes positive numerical vmin and vmax arg as min, max values for log scale colour normalisation.

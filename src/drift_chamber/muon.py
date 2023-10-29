@@ -14,6 +14,8 @@ class Muon:
     height: height of plane above detector in cm (vertical direction in relation to diagram above). Must be >= 30 (height of detector)
     """
 
+    POSITIVE_CHARGE_PROBABILITY = 0.53
+
     def __init__(self, width: int = 100, length: int = 80, height: int = 60) -> None:
         """
         Initialises random muon attributes and takes horizontal dimensions and height of plane above detector
@@ -21,17 +23,13 @@ class Muon:
         """
         self.energy: float = np.random.lognormal(6.55, 1.8)
         r = np.random.random()
-        self.charge: int = 1 if r > 0.43 else -1
+        self.charge: int = 1 if r > (1 - Muon.POSITIVE_CHARGE_PROBABILITY) else -1
         # Accept/reject method to get random zenith angle, distributed proportional to cos squared
         x, y = np.pi * np.random.random() + 0.5 * np.pi, np.random.random()
         while y >= (np.cos(x)) ** 2:
             x, y = np.pi * np.random.random() + 0.5 * np.pi, np.random.random()
         self.zen: float = x
         self.azi: float = 2 * np.pi * np.random.random()
-        if height < 30:
-            raise Exception(
-                f"{height} arg is too small! Must be > 30 as muons must start above detector."
-            )
         self.height = height
         self.x_coord: float = width * np.random.random() - 0.5 * width
         self.y_coord: float = length * np.random.random() - 0.5 * length + 25
