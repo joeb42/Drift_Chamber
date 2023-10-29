@@ -3,3 +3,4 @@ mypy
 pytest
 pytest_mock
 black
+pytest-cov
