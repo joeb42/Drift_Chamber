@@ -1,5 +1,6 @@
 import sys
 from unittest.mock import MagicMock
+
 sys.modules["drift_chamber.widget"] = MagicMock()
 
 import numpy as np
@@ -26,7 +27,7 @@ def test_init(mocker):
         r,
         azi / (2 * np.pi),
         x_coord,
-        y_coord
+        y_coord,
     ]
     muon = Muon()
     mock_log_normal.assert_called_once_with(6.55, 1.8)
@@ -35,5 +36,5 @@ def test_init(mocker):
     assert muon.energy == mock_log_normal.return_value
     assert muon.zen == zen
     assert muon.azi == azi
-    assert muon.x_coord == x_coord * 100 - 50 
+    assert muon.x_coord == x_coord * 100 - 50
     assert muon.y_coord == y_coord * 80 - 15

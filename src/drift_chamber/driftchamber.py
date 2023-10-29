@@ -1,15 +1,17 @@
-import numpy as np
-from scipy import stats, sparse
-import math
 import copy
+import math
+
 import matplotlib
 
 matplotlib.use("TkAgg")
-import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from matplotlib.colors import LogNorm
 import matplotlib.cm
-from .muon import Muon, MissedDetector
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import LogNorm
+from scipy import sparse, stats
+
+from .muon import Muon
 
 
 class DriftChamber:
@@ -44,7 +46,7 @@ class DriftChamber:
         Takes positive numerical spacing, numerical E (electric field), positive numerical D (diffusivity)
         and positive numerical tau (timestep) as optional kwargs.
         Also takes mat kwarg, True by default, this should be set to False if need to avoid constructing matrix
-        (e.g for investigating small spacings in the initial ionisation track that would otherwise generate very large matricies).
+        (e.g for small spacings in the initial ionisation track that would otherwise generate very large matricies).
         """
         self.grid: np.ndarray = np.zeros((int(30 / spacing), (int(50 / spacing))))
         self.spacing = spacing
@@ -73,7 +75,7 @@ class DriftChamber:
 
     def __str__(self) -> str:
         """String representation of DriftChamber object for ease of debugging"""
-        return f"""Drift Chamber object, grid spacing of {self.spacing}cm, 
+        return f"""Drift Chamber object, grid spacing of {self.spacing}cm,
         diffusivity of {self.D}, E-field of {self.E}."""
 
     def initial_ion(self, muon: Muon) -> None:

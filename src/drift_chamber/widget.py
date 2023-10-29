@@ -1,16 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
+
 import matplotlib
 
 matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import matplotlib.animation as animation
-from matplotlib.colors import LogNorm
-import matplotlib.cm
-from matplotlib.figure import Figure
 import copy
-from .muon import Muon, MissedDetector
+
+import matplotlib.animation as animation
+import matplotlib.cm
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.colors import LogNorm
+from matplotlib.figure import Figure
+
 from .driftchamber import DriftChamber
+from .muon import MissedDetector, Muon
 
 
 class Widget:

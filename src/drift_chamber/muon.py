@@ -9,9 +9,9 @@ class Muon:
     zen: Zenith angle, random value distributed proportional to cos^2 between 3pi/2 and pi/2
     energy: Random log-normal value in GeV of mean 6.55 and stdev 1.8
     charge: Randomly generated charge of muon takes values +1 (with probability 0.53) and -1 (with probability 0.47)
-    x_coord: x coordinate of muon on plane in cm (direction into the page in relation to diagram above)
-    y_coord: y coordinate of muon on plane in cm (horizontal direction in relation to diagram above)
-    height: height of plane above detector in cm (vertical direction in relation to diagram above). Must be >= 30 (height of detector)
+    x_coord: x coordinate of muon on plane in cm (direction into the page wrt diagram above)
+    y_coord: y coordinate of muon on plane in cm (horizontal direction wrt diagram)
+    height: height of plane above detector in cm (vertical direction wrt diagram). Must be >= 30 (height of detector)
     """
 
     POSITIVE_CHARGE_PROBABILITY = 0.53
@@ -39,7 +39,12 @@ class Muon:
         String representation of Muon object for ease of debugging and for use in MissedDetector exception
         """
 
-        return f"Muon: energy: {self.energy:.0f} GeV, charge: {self.charge}e, zenith: {self.zen:.3f}, azimuthal: {self.azi:.3f}, x: {self.x_coord:.3f}, y: {self.y_coord:.3f}"
+        return (f"Muon: energy: {self.energy:.0f} GeV,"
+                "charge: {self.charge}e,"
+                "zenith: {self.zen:.3f},"
+                "azimuthal: {self.azi:.3f},"
+                "x: {self.x_coord:.3f},"
+                "y: {self.y_coord:.3f}")
 
     def starting_coords(self) -> tuple[float, float]:
         """
